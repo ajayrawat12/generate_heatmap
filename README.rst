@@ -4,8 +4,7 @@
 To generate the heatmaps from the specific camera's in a location.
 
 To Use Simply do::
-	>>> import generate_heatmap
-	>>> 
+	>>> generate_heatmap --vloc "Video Location" --imgloc "Output Image Location"
 
 
 
