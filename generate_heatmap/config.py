@@ -13,21 +13,25 @@ parser = argparse.ArgumentParser(
 parser.add_argument(
     '--vloc', help='Full Location of the video in your system.',
     default=USERHOME, type=str, dest='VLOC')
+
 parser.add_argument(
     '--imgloc', help='Location where images generated from the video will be stored.',
     default=USERHOME, type=str, dest='IMGLOC')
+
 parser.add_argument(
     '--skp', help='Frames to skip per second', type=int,
     default=10, dest='SKIP')
 
 parser.add_argument(
-    '--objdir', help='Frames to skip per second', type=int,
-    default=10, dest='PICKLELOC')
+    '--pickleloc', help='Frames to skip per second', type=str,
+    default=USERHOME, dest='PICKLELOC')
 
 
 parser.add_argument(
-    '--base_url', help='Frames to skip per second', type=int,
-    default=10, dest='BASEURL')
+    '--baseurl', help='Base Image URL of the Camera', type=str, dest='BASEURL')
+
+parser.add_argument(
+    '--reqdata', help='Camera and Request Details in the Request', type=str, dest='REQDATA')
 
 args = parser.parse_args()
 
