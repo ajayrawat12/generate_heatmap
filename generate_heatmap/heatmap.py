@@ -9,7 +9,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 
-def pkl_to_img(base_img_url, pickle_loc, pickle_name):
+def pkl_to_img(base_img_url, pickle_loc, pickle_name, heat_loc):
     """Add all requested heatmaps and saves it in temp.png.
 
     Args:
@@ -20,11 +20,11 @@ def pkl_to_img(base_img_url, pickle_loc, pickle_name):
         none
     """
 
-    im_h, im_w = cv_size(base_img_url)
+    im_h, im_w = cv_size(img=base_img_url)
     print(im_h, im_w, 'from Heatmap image size')
     heat = np.zeros((im_h, im_w))
 
     with open(os.path.join('{}/{}.pkl'.format(pickle_loc, pickle_name)), 'rb') as f:
         heat += pickle.load(f)
 
-    plt.imsave("{}.png".format(pickle_loc), heat, format="png", cmap="magma")
+    plt.imsave("{}/{}.png".format(heat_loc, pickle_name), heat, format="png", cmap="magma")

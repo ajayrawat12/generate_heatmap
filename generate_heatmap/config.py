@@ -23,7 +23,7 @@ parser.add_argument(
     default=10, dest='SKIP')
 
 parser.add_argument(
-    '--pickleloc', help='Frames to skip per second', type=str,
+    '--pickleloc', help='Location of the pickle file', type=str,
     default=USERHOME, dest='PICKLELOC')
 
 
@@ -32,6 +32,9 @@ parser.add_argument(
 
 parser.add_argument(
     '--reqdata', help='Camera and Request Details in the Request', type=str, dest='REQDATA')
+
+parser.add_argument(
+    '--heatloc', help='Location of the heatmap to be stored', type=str, dest='HEATLOC')
 
 args = parser.parse_args()
 
