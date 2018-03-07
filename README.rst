@@ -4,7 +4,9 @@
 To generate the heatmaps from the specific camera's in a location.
 
 To Use Simply do::
-	>>> generate_heatmap --vloc "Video Location" --imgloc "Output Image Location"
+	>>> generate_heatmap ajayrawat$ generate_heatmap --imgloc /Users/ajayrawat/cowrks/videos_data/mill_img
+		--pickleloc /Users/ajayrawat/cowrks/videos_data/milPickle --reqdata millGrndHeat2 
+		--baseurl /Users/ajayrawat/cowrks/videos_data/mill_img/15.png --heatloc /Users/ajayrawat/cowrks/videos_data/heatmaps/
 
 
 
