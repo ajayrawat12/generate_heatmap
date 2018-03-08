@@ -22,3 +22,4 @@ ruamel-yaml==0.15.35
 six==1.11.0
 urllib3==1.22
 youtube-dl==2018.2.26
+pycurl==7.43.0.1
