@@ -33,11 +33,11 @@ parser.add_argument('-b', '--baseurl', help='Base Image URL of the Camera',
 parser.add_argument('-r', '--reqdata', help='Camera and Request Details in the Request',
                     type=str, dest='REQDATA')
 
-parser.add_argument('-h', '--heatloc', help='Location of the heatmap to be stored',
+parser.add_argument('-hl', '--heatloc', help='Location of the heatmap to be stored',
                     type=str, dest='HEATLOC')
 
 # Non Mandatory Parameters.
-parser.add_argument('-p', '--password', action='store',
+parser.add_argument('-pass', '--password', action='store',
                     help='Password for authentication', dest='PASSWORD')
 
 parser.add_argument('-c', '--heatcode', action='store',
