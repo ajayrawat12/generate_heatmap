@@ -1,14 +1,16 @@
-import pickle
+# import pickle
 # from datetime import datetime
 # from datetime import timedelta
+import base64
 import pycurl
 from generate_heatmap.process import cv_size
 import numpy as np
-import os
+# import os
 import matplotlib
 matplotlib.use('Agg')
-import matplotlib.pyplot as plt
-from urllib.parse import urlencode
+# import matplotlib.pyplot as plt
+# from urllib.parse import urlencode
+
 
 def pkl_to_img(base_img_url, pickle_loc, pickle_name, heat_loc, p_code=None, h_code=None, api=None):
     """Save the Requested heatmap.
@@ -30,28 +32,28 @@ def pkl_to_img(base_img_url, pickle_loc, pickle_name, heat_loc, p_code=None, h_c
     #     heat += pickle.load(f)
 
     # plt.imsave("{}/{}.png".format(heat_loc, pickle_name), heat, format="png", cmap="magma")
-    
-    img_url = "{}/{}.png".format(heat_loc, pickle_name)
+    img_name = "{}.png".format(pickle_name)
+    img_url = "{}/{}".format(heat_loc, img_name)
     if (p_code and h_code and api):
         # Send the Data to api
-        resp = send_heatmap(img_url, p_code, h_code, api)
+        resp = send_heatmap(img_url, img_name, p_code, h_code, api)
         print(resp)
 
 
-def send_heatmap(img_url, p_code, h_code, API):
+def send_heatmap(img_url, img_name, p_code, h_code, API):
     try:
-        data = {
-            'h_code': h_code
-        }
+        with open(img_url, "rb") as image_file:
+            encoded_string = base64.b64encode(image_file.read())
 
-        post_data = urlencode(data)
         # print(img_url, post_data, 'Data img URL and Post Data.')
 
         c = pycurl.Curl()
         # c.setopt(c.CONNECTTIMEOUT, 5)
         c.setopt(c.POST, 1)
         c.setopt(c.URL, API)
-        c.setopt(c.HTTPPOST, [('fileupload', (c.FORM_FILE, img_url) ), ('h_code', h_code) ])
+        c.setopt(c.HTTPPOST, [('fileupload', (encoded_string)),
+                              ('filename', img_name),
+                              ('h_code', h_code)])
         # c.setopt(c.HTTPPOST, [('h_code', h_code)])
         # c.setopt(c.POSTFIELDS, post_data)
         c.setopt(pycurl.CUSTOMREQUEST, "PUT")
