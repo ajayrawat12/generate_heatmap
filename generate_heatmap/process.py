@@ -1,8 +1,8 @@
 import cv2
 import numpy as np
 import os
-from datetime import datetime
-from datetime import timedelta
+# from datetime import datetime
+# from datetime import timedelta
 import pickle
 
 
@@ -34,7 +34,8 @@ def process_map(heatmap):
         cv.THRESH_TOZERO
         cv.THRESH_TOZERO_INV
     """
-    heatmap = cv2.threshold(heatmap, heatmap.max() / 50, 1804, cv2.THRESH_TOZERO)[1]
+
+    heatmap = cv2.threshold(heatmap, heatmap.max() / 400, 255, cv2.THRESH_TOZERO)[1]
     return heatmap
 
 
@@ -52,19 +53,23 @@ def process_image(img_dir, out_dir, base_img_url, req_data):
         # ToDo: need to generate error if the input is not dir.
         return False
 
-    imgs = os.listdir(img_dir)
+    imgs = [x for x in os.listdir(img_dir) if not x.startswith('.')]
     imgs.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
 
     base_img_url = base_img_url if base_img_url else imgs[0]
     no_motion = cv2.imread(base_img_url, 0)
-    # 0 in the end is for black and white
+
+    # f0 = cv2.imread('{}/{}'.format(img_dir, imgs[0]), 0)
+
     im_h, im_w = cv_size(img=imgs[0], img_dir=img_dir)
     usage = np.zeros((im_h, im_w))
+    # motion = np.zeros((im_h, im_w))
 
     for img_loc in imgs[1:]:
-        # print(img_loc)
         img = cv2.imread('{}/{}'.format(img_dir, img_loc), 0)
         usage += cv2.absdiff(no_motion, img)
+        # motion += cv2.absdiff(f0, img)
+        # f0 = img
 
     # last_hour = (datetime.now() - timedelta(hours=1)).isoformat('-', 'hours')
     print(usage.max(), usage.min(), 'from process image')

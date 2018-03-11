@@ -1,4 +1,5 @@
 import cv2
+import os
 # ToDo : Need to test on Windows Machine
 
 
@@ -9,19 +10,23 @@ def preprocess(img):
 
 
 def generate_images(vloc, imgloc, skp=None):
-    vid = cv2.VideoCapture(vloc)
-
     i = 0
-    skip = skp if skp else 10
-    while True:
-        i += 1
-        grabbed, t1 = vid.read()
-        if not grabbed:
-            break
-        if i % skip:
-            continue
-        t1 = preprocess(t1)
-        print(i)
-        cv2.imwrite('{}/{}.png'.format(imgloc, i), t1)
+    for videos in sorted([x for x in os.listdir(vloc) if not x.startswith('.')],
+                         key=lambda x: x.lower()):
 
-    vid.release()
+        vid = cv2.VideoCapture('{}/{}'.format(vloc, videos))
+        print('Images for video.: ', videos)
+        # i = 0
+        skip = skp + 2 if skp else 16
+        while True:
+            i += 1
+            grabbed, t1 = vid.read()
+            if not grabbed:
+                break
+            if i % skip:
+                continue
+            t1 = preprocess(t1)
+            print(i)
+            cv2.imwrite('{}/{}.png'.format(imgloc, i), t1)
+
+        vid.release()
