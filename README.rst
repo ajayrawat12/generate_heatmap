@@ -13,6 +13,11 @@ ADDITIONAL DEPENDENCIES
 CV2, you can install opencv for your specific platforms 
 either by using conda , miniconda or manually downloading and installing it.
 
+External installation links, using conda_ and windows_.
+.. _conda: https://anaconda.org/conda-forge/opencv
+.. _windows: https://docs.opencv.org/3.3.1/d5/de5/tutorial_py_setup_in_windows.html
+
+
 DESCRIPTION
 ===========
 
@@ -31,8 +36,10 @@ USAGE
 5. (-hl or --heatloc): Heatmap Folder, where final heatmap image will be stored.
 6. (-b or --baseurl): Keep the base image of the video in one place and pass it as, (This image will be a reference image for the downloaded videos.)
 
-Optional Parameters :
+Optional Parameters:
+
 7. -pass, password of the api for your authentication.
+
 8. -u   , API EndPoint where heatmap image will be sent.
 	
 
