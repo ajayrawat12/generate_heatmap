@@ -42,8 +42,7 @@ USAGE
 Optional Parameters:
 
 7. -pass, password of the api for your authentication.
-
-8. -u   , API EndPoint where heatmap image will be sent.
+8. -u , API EndPoint where heatmap image will be sent.
 	
 
 WORKING
