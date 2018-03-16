@@ -13,13 +13,13 @@ def get_requirements():
 
 setup(name='generate_heatmap',
       version='0.1',
-      description='generate heatmap from the video.',
+      description='Generate heatmap from the video for usage analysis.',
       long_description=readme(),
       classifiers=[
-          'Development Status :: 3 - Alpha',
-          'License :: OSI Approved :: MIT License',
+          'Development Status :: 1 - Alpha',
+          'License :: OSI Approved :: Apache 2.0 License',
           'Programming Language :: Python :: 3.6',
-          'Topic :: Text Processing :: Linguistic',
+          'Topic :: Video Processing :: Images',
       ],
       keywords='Generate Heatmap from video',
       url='https://github.com/ajayrawat12/generate_heatmap',
