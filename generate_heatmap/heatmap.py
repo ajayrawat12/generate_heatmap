@@ -1,9 +1,11 @@
 import pickle
 import os
+import json
 # from datetime import datetime
 # from datetime import timedelta
 import base64
-import pycurl
+# import pycurl
+import requests
 from generate_heatmap.process import cv_size
 import numpy as np
 import matplotlib
@@ -25,6 +27,8 @@ def pkl_to_img(base_img_url, pickle_loc, pickle_name, heat_loc, p_code=None, h_c
         none
     """
 
+    print(pickle_loc, pickle_name)
+
     im_h, im_w = cv_size(img=base_img_url)
     heat = np.zeros((im_h, im_w))
 
@@ -35,32 +39,29 @@ def pkl_to_img(base_img_url, pickle_loc, pickle_name, heat_loc, p_code=None, h_c
     img_url = "{}/{}".format(heat_loc, img_name)
 
     plt.imsave("{}".format(img_url), heat, format="png", cmap="magma")
+    print('image heatmap generate completed.')
 
     if (p_code and h_code and api):
         # Send the Data to api
-        resp = send_heatmap(img_url, img_name, p_code, h_code, api)
-        print(resp)
+        send_heatmap(img_url, img_name, p_code, h_code, api)
 
 
 def send_heatmap(img_url, img_name, p_code, h_code, API):
     try:
         # Sending image file as base64 encoded format.
+        # ToDo: can reduce the image file and then send to API.
         with open(img_url, "rb") as image_file:
             encoded_string = base64.b64encode(image_file.read())
 
-        c = pycurl.Curl()
-        # c.setopt(c.CONNECTTIMEOUT, 5)
-        c.setopt(c.POST, 1)
-        c.setopt(c.URL, API)
-        c.setopt(c.HTTPPOST, [('fileupload', (encoded_string)),
-                              ('filename', img_name),
-                              ('h_code', h_code)])
-        c.setopt(pycurl.CUSTOMREQUEST, "PUT")
-        c.perform()
-        c.close()
+        payload = {'filename': img_name,
+                   'h_code': h_code,
+                   'p_code': p_code,
+                   'fileupload': json.dumps(encoded_string.decode("utf-8")),
+                   }
 
-        # headers = {'Authorization': p_code}
-        print('Data sent...')
+        resp = requests.put(API, json=payload)
+        print('Data sent to the API...', resp)
+        json_data = json.loads(resp.text)
+        print('Message From API..', json_data['message'])
     except Exception as e:
         print(str(e))
-        raise e

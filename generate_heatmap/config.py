@@ -40,7 +40,7 @@ parser.add_argument('-hl', '--heatloc', help='Location of the heatmap to be stor
 parser.add_argument('-pass', '--password', action='store',
                     help='Password for authentication', dest='PASSWORD')
 
-parser.add_argument('-c', '--heatcode', action='store',
+parser.add_argument('-hc', '--heatcode', action='store',
                     help='heatmap code', dest='HEATCODE')
 
 parser.add_argument('-u', '--apiurl',
