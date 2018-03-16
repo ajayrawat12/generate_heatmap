@@ -5,7 +5,6 @@ chardet==3.0.4
 conda==4.4.10
 cryptography==2.1.4
 cycler==0.10.0
--e git+https://github.com/ajayrawat12/generate_heatmap.git@50daaf504fb69ec513facef5e60dd49a106c1d70#egg=generate_heatmap
 idna==2.6
 Markdown==2.6.11
 matplotlib==2.1.2
@@ -21,5 +20,3 @@ requests==2.18.4
 ruamel-yaml==0.15.35
 six==1.11.0
 urllib3==1.22
-youtube-dl==2018.2.26
-pycurl==7.43.0.1

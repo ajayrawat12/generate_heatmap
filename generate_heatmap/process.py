@@ -50,7 +50,7 @@ def cv_size(img, img_dir=None):
 
 def process_image(img_dir, out_dir, base_img_url, req_data):
     if not os.path.isdir(img_dir):
-        # ToDo: need to generate error if the input is not dir.
+        print('IMGLOC is not a directory.')
         return False
 
     imgs = [x for x in os.listdir(img_dir) if not x.startswith('.')]
@@ -59,20 +59,12 @@ def process_image(img_dir, out_dir, base_img_url, req_data):
     base_img_url = base_img_url if base_img_url else imgs[0]
     no_motion = cv2.imread(base_img_url, 0)
 
-    # f0 = cv2.imread('{}/{}'.format(img_dir, imgs[0]), 0)
-
     im_h, im_w = cv_size(img=imgs[0], img_dir=img_dir)
     usage = np.zeros((im_h, im_w))
-    # motion = np.zeros((im_h, im_w))
 
     for img_loc in imgs[1:]:
         img = cv2.imread('{}/{}'.format(img_dir, img_loc), 0)
         usage += cv2.absdiff(no_motion, img)
-        # motion += cv2.absdiff(f0, img)
-        # f0 = img
-
-    # last_hour = (datetime.now() - timedelta(hours=1)).isoformat('-', 'hours')
-    print(usage.max(), usage.min(), 'from process image')
 
     with open(os.path.join(out_dir, '{}.pkl'.format(req_data)), 'wb+') as f:
         pickle.dump(process_map(usage), f)

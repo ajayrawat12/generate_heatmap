@@ -15,9 +15,10 @@ def generate_images(vloc, imgloc, skp=None):
                          key=lambda x: x.lower()):
 
         vid = cv2.VideoCapture('{}/{}'.format(vloc, videos))
-        print('Images for video.: ', videos)
+        print(vid, 'Images for video.: ', videos)
         # i = 0
-        skip = skp + 2 if skp else 16
+        skip = 15
+        # print("skip is", skip)
         while True:
             i += 1
             grabbed, t1 = vid.read()
