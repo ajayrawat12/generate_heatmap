@@ -1,10 +1,7 @@
 import pickle
 import os
 import json
-# from datetime import datetime
-# from datetime import timedelta
 import base64
-# import pycurl
 import requests
 from generate_heatmap.process import cv_size
 import numpy as np

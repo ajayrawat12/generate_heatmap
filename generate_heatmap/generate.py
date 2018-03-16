@@ -1,6 +1,5 @@
 import cv2
 import os
-# ToDo : Need to test on Windows Machine
 
 
 def preprocess(img):

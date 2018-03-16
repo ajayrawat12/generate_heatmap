@@ -1,8 +1,6 @@
 import cv2
 import numpy as np
 import os
-# from datetime import datetime
-# from datetime import timedelta
 import pickle
 
 
@@ -14,13 +12,15 @@ def process_map(heatmap):
 
     Returns:
         processed heatmap
-    """
+
     # Remove movement of timer on top right
     # row, col = np.indices((55, 595))
     # heatmap[row + 40, col + 1265] = 0
 
     # Remove last 1/15 of the motion
-    """
+
+    About CV2:
+
         cv2.threshold(),
         First argument is the source image, which should be a grayscale image.
         Second argument is the threshold value which is used to classify the pixel values.
