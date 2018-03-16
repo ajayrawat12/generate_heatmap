@@ -14,6 +14,9 @@ CV2, you can install opencv for your specific platforms
 either by using conda , miniconda or manually downloading and installing it.
 
 External installation links, using conda_ and windows_.
+
+
+
 .. _conda: https://anaconda.org/conda-forge/opencv
 .. _windows: https://docs.opencv.org/3.3.1/d5/de5/tutorial_py_setup_in_windows.html
 
