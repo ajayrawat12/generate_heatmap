@@ -4,6 +4,12 @@ import os
 # import skvideo.io
 
 
+def _mov_process(vid, imgloc):
+    # generate a mp4 video for now from the ffmpeg command
+    # subprocess.call(['ffmpeg', '-i', vid, '-f' ,'image2', "{}/v_%05d.png".format(imgloc)])
+    pass
+
+
 def preprocess(img):
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     img = cv2.blur(img, (11, 11))
@@ -16,11 +22,14 @@ def generate_images(vloc, imgloc, cwd=None, skp=None):
                          key=lambda x: x.lower()):
         print("Processing Video {}".format(videos))
 
-        # os.chdir(cwd)
-        # "ffmpeg -i video.webm image-%03d.png"
+        # file = vloc.split("/")[-1:]
 
-        # subprocess.call(['ls', '-l'])
-        # subprocess.call(['ffmpeg', '-i', 'output.avi', '-t', '5', 'out.gif'])
+        filename, file_extension = os.path.splitext(vloc)
+
+        if file_extension[1:] in ["mov"]:
+            print("Please convert the mov file into mp4 using ffmpeg.")
+            return
+            # _mov_process(vloc)
 
         vid = cv2.VideoCapture('{}/{}'.format(vloc, videos))
         print(vid, 'Images for video.: ', videos)

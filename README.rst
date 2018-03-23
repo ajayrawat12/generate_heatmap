@@ -5,7 +5,7 @@ To generate the heatmaps from the specific camera's in a location.
 
 To Use Simply do::
 	>>> generate_heatmap -i /Users/abc/heat_data/ew_grnd -p /Users/abc/heat_data/ewPickle -r EWGrndMorning -hl /Users/abc/heat_data/heatmaps/
-		-v /Users/abc/heat_data/CCTV_Videos/ -b /Users/abc/heat_data/baseImages/ewGcL.png -pass “XXXXXX” -u http://xxxx.abc.com/xxxxxxx
+		-v /Users/abc/heat_data/CCTV_Videos/ -b /Users/abc/heat_data/baseImages/ewGcL.png -pass “XXXXXX” -u http://xxxx.abc.com/xxxxxxx -hc 1234
 
 
 ADDITIONAL DEPENDENCIES
@@ -43,6 +43,7 @@ Optional Parameters:
 
 7. -pass, password of the api for your authentication.
 8. -u , API EndPoint where heatmap image will be sent.
+9. -hc, heatcode to identify which req image is this.
 	
 
 WORKING

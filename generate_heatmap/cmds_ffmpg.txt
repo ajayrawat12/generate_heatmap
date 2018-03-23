@@ -1,4 +1,6 @@
 ffmpeg -i b.mov -vcodec copy -acodec copy outb.mp4
+
+# to generate the mp4 video from .mov file
 ffmpeg -i FB_1_Floor.MOV -vcodec copy -acodec copy outEW.mp4
 
 
