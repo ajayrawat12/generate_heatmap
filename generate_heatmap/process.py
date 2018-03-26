@@ -32,7 +32,7 @@ def process_map(heatmap):
     """
     # Remove movement of timer on top right for EW right now.
     row, col = np.indices((55, 595))
-    heatmap[row + 40, col + 1265] = 0
+    heatmap[:102] = 0
 
     heatmap = cv2.threshold(heatmap, heatmap.max() / 15, 255, cv2.THRESH_TOZERO)[1]
     return heatmap
@@ -57,6 +57,8 @@ def process_image(img_dir, out_dir, base_img_url, req_data):
 
     base_img_url = base_img_url if base_img_url else imgs[0]
     print(base_img_url)
+
+    base_url = "{}/{}".format(img_dir, imgs[0])
     # no_motion = cv2.imread(base_img_url, 0)
 
     im_h, im_w = cv_size(img=imgs[0], img_dir=img_dir)
@@ -73,6 +75,8 @@ def process_image(img_dir, out_dir, base_img_url, req_data):
 
     with open(os.path.join(out_dir, '{}.pkl'.format(req_data)), 'wb+') as f:
         pickle.dump(process_map(motion), f)
+
+    return base_url
 
     # with open(os.path.join(out_dir, '{}.pkl'.format(req_data)), 'wb+') as f:
     #     pickle.dump(process_map(usage), f)

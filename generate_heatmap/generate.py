@@ -27,7 +27,7 @@ def generate_images(vloc, imgloc, cwd=None, skp=None):
         filename, file_extension = os.path.splitext(vloc)
 
         if file_extension[1:] in ["mov"]:
-            print("Please convert the mov file into mp4 using ffmpeg.")
+            print("Please convert the mov file into mp4 using ffmpeg or video converter.")
             return
             # _mov_process(vloc)
 
