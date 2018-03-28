@@ -24,7 +24,7 @@ def pkl_to_img(base_img_url, pickle_loc, pickle_name, heat_loc, p_code=None, h_c
         none
     """
 
-    print(pickle_loc, pickle_name)
+    # print(pickle_loc, pickle_name)
 
     im_h, im_w = cv_size(img=base_img_url)
     heat = np.zeros((im_h, im_w))
@@ -36,7 +36,7 @@ def pkl_to_img(base_img_url, pickle_loc, pickle_name, heat_loc, p_code=None, h_c
     img_url = "{}/{}".format(heat_loc, img_name)
 
     plt.imsave("{}".format(img_url), heat, format="png", cmap="magma")
-    print('image heatmap generate completed.')
+    print('image heatmap generate completed. at {}'.format(img_url))
 
     if (p_code and h_code and api):
         # Send the Data to api

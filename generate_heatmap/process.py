@@ -13,10 +13,6 @@ def process_map(heatmap):
     Returns:
         processed heatmap
 
-    # Remove movement of timer on top right
-    # row, col = np.indices((55, 595))
-    # heatmap[row + 40, col + 1265] = 0
-
     # Remove last 1/15 of the motion
 
     About CV2:
@@ -34,8 +30,11 @@ def process_map(heatmap):
         cv.THRESH_TOZERO
         cv.THRESH_TOZERO_INV
     """
+    # Remove movement of timer on top right for EW right now.
+    row, col = np.indices((55, 595))
+    heatmap[:102] = 0
 
-    heatmap = cv2.threshold(heatmap, heatmap.max() / 400, 255, cv2.THRESH_TOZERO)[1]
+    heatmap = cv2.threshold(heatmap, heatmap.max() / 15, 255, cv2.THRESH_TOZERO)[1]
     return heatmap
 
 
@@ -57,14 +56,24 @@ def process_image(img_dir, out_dir, base_img_url, req_data):
     imgs.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
 
     base_img_url = base_img_url if base_img_url else imgs[0]
-    no_motion = cv2.imread(base_img_url, 0)
+    print(base_img_url)
+
+    base_url = "{}/{}".format(img_dir, imgs[0])
+    # no_motion = cv2.imread(base_img_url, 0)
 
     im_h, im_w = cv_size(img=imgs[0], img_dir=img_dir)
-    usage = np.zeros((im_h, im_w))
+    # usage = np.zeros((im_h, im_w))
+    motion = np.zeros((im_h, im_w))
+
+    f0 = cv2.imread('{}/{}'.format(img_dir, imgs[0]), 0)
 
     for img_loc in imgs[1:]:
         img = cv2.imread('{}/{}'.format(img_dir, img_loc), 0)
-        usage += cv2.absdiff(no_motion, img)
+        motion += cv2.absdiff(f0, img)
+        # usage += cv2.absdiff(no_motion, img)
+        f0 = img
 
     with open(os.path.join(out_dir, '{}.pkl'.format(req_data)), 'wb+') as f:
-        pickle.dump(process_map(usage), f)
+        pickle.dump(process_map(motion), f)
+
+    return base_url
