@@ -22,14 +22,11 @@ def generate_images(vloc, imgloc, cwd=None, skp=None):
                          key=lambda x: x.lower()):
         print("Processing Video {}".format(videos))
 
-        # file = vloc.split("/")[-1:]
-
         filename, file_extension = os.path.splitext(vloc)
 
         if file_extension[1:] in ["mov"]:
             print("Please convert the mov file into mp4 using ffmpeg or video converter.")
             return
-            # _mov_process(vloc)
 
         vid = cv2.VideoCapture('{}/{}'.format(vloc, videos))
         print(vid, 'Images for video.: ', videos)

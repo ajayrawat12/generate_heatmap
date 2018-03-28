@@ -77,6 +77,3 @@ def process_image(img_dir, out_dir, base_img_url, req_data):
         pickle.dump(process_map(motion), f)
 
     return base_url
-
-    # with open(os.path.join(out_dir, '{}.pkl'.format(req_data)), 'wb+') as f:
-    #     pickle.dump(process_map(usage), f)

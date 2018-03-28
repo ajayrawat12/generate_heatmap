@@ -24,7 +24,7 @@ def pkl_to_img(base_img_url, pickle_loc, pickle_name, heat_loc, p_code=None, h_c
         none
     """
 
-    print(pickle_loc, pickle_name)
+    # print(pickle_loc, pickle_name)
 
     im_h, im_w = cv_size(img=base_img_url)
     heat = np.zeros((im_h, im_w))
