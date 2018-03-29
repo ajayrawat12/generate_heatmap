@@ -31,7 +31,7 @@ def generate_images(vloc, imgloc, cwd=None, skp=None):
         vid = cv2.VideoCapture('{}/{}'.format(vloc, videos))
         print(vid, 'Images for video.: ', videos)
         # i = 0
-        skip = 10
+        skip = skp if skp else 10
         print("Video Processing")
         while True:
             i += 1
