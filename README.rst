@@ -8,6 +8,11 @@ To Use Simply do::
 		-v /Users/abc/heat_data/CCTV_Videos/ -b /Users/abc/heat_data/baseImages/ewGcL.png -pass “XXXXXX” -u http://xxxx.abc.com/xxxxxxx
 
 
+INSTALLATION
+============
+pip install generate-heatmap
+
+
 ADDITIONAL DEPENDENCIES
 =======================
 CV2, you can install opencv for your specific platforms 
